@@ -60,7 +60,13 @@ case "$answer" in
 		for x in $(find /var/www/html -type f -name '*.php'); do fgrep -HF coinhive.min.js $x; 
 		done 2> /dev/null
 		for x in $(find /var/www/vhosts/*/httpdocs -type f -name '*.php'); do fgrep -HF coinhive.min.js $x; 
-		done 2> /dev/null 
+		done 2> /dev/null
+		for x in $(find /home/*/public_html/ -type f -name '*.php'); do fgrep -HF https://wpupdates.github.io/ping $x; 
+		done 2> /dev/null
+		for x in $(find /var/www/html -type f -name '*.php'); do fgrep -HF https://wpupdates.github.io/ping $x; 
+		done 2> /dev/null
+		for x in $(find /var/www/vhosts/*/httpdocs -type f -name '*.php'); do fgrep -HF https://wpupdates.github.io/ping $x; 
+		done 2> /dev/null
 		find /home/*/public_html -name coinhive.min.js 2> /dev/null
 		find /var/www/html -name coinhive.min.js 2> /dev/null
 		find /var/www/vhosts/*/httpdocs -name coinhive.min.js 2> /dev/null;;
