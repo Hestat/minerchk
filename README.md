@@ -1,2 +1,2 @@
 # minerchk
-Bash script to Check for malicious Cryptominig
+Bash script to Check for malicious Cryptomining
