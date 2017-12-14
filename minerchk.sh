@@ -55,29 +55,11 @@ case "$answer" in
 		echo "This make take some time if you have many sites."
 		echo " "
 		printf "%b" "$gre"
-		for x in $(find /home/*/public_html/ -type f -name '*.php'); do fgrep -HF coinhive.min.js $x; 
+		for x in $(find /home/*/public_html/ -type f -name '*.php'); do egrep -Hw 'coinhive.min.js|wpupdates.github.io/ping|cryptonight.asm.js|coin-hive.com' $x; 
 		done 2> /dev/null
-		for x in $(find /var/www/html -type f -name '*.php'); do fgrep -HF coinhive.min.js $x; 
+		for x in $(find /var/www/html -type f -name '*.php'); do egrep -Hw 'coinhive.min.js|wpupdates.github.io/ping|cryptonight.asm.js|coin-hive.com' $x; 
 		done 2> /dev/null
-		for x in $(find /var/www/vhosts/*/httpdocs -type f -name '*.php'); do fgrep -HF coinhive.min.js $x; 
-		done 2> /dev/null
-		for x in $(find /home/*/public_html/ -type f -name '*.php'); do fgrep -HF wpupdates.github.io/ping $x; 
-		done 2> /dev/null
-		for x in $(find /var/www/html -type f -name '*.php'); do fgrep -HF wpupdates.github.io/ping $x; 
-		done 2> /dev/null
-		for x in $(find /var/www/vhosts/*/httpdocs -type f -name '*.php'); do fgrep -HF wpupdates.github.io/ping $x; 
-		done 2> /dev/null
-		for x in $(find /home/*/public_html/ -type f -name '*.php'); do fgrep -HF cryptonight.asm.js $x; 
-		done 2> /dev/null
-		for x in $(find /var/www/html -type f -name '*.php'); do fgrep -HF cryptonight.asm.js $x; 
-		done 2> /dev/null
-		for x in $(find /var/www/vhosts/*/httpdocs -type f -name '*.php'); do fgrep -HF cryptonight.asm.js  $x; 
-		done 2> /dev/null
-		for x in $(find /home/*/public_html/ -type f -name '*.php'); do fgrep -HF coin-hive.com $x; 
-		done 2> /dev/null
-		for x in $(find /var/www/html -type f -name '*.php'); do fgrep -HF coin-hive.com $x; 
-		done 2> /dev/null
-		for x in $(find /var/www/vhosts/*/httpdocs -type f -name '*.php'); do fgrep -HF coin-hive.com $x; 
+		for x in $(find /var/www/vhosts/*/httpdocs -type f -name '*.php'); do egrep -Hw 'coinhive.min.js|wpupdates.github.io/ping|cryptonight.asm.js|coin-hive.com' $x;
 		done 2> /dev/null
 		find /home/*/public_html -name coinhive.min.js 2> /dev/null
 		find /var/www/html -name coinhive.min.js 2> /dev/null
