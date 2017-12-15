@@ -1,0 +1,66 @@
+xmr.crypto-pool.fr 163.172.204.219
+xmr.crypto-pool.fr 163.172.207.69
+xmr.crypto-pool.fr 163.172.226.120
+xmr.crypto-pool.fr 163.172.204.213
+xmr.crypto-pool.fr 163.172.226.131
+xmr.crypto-pool.fr 163.172.207.198
+xmr.crypto-pool.fr 163.172.207.71
+xmr.crypto-pool.fr 163.172.226.137
+xmr-eu1.nanopool.org 213.32.74.219
+xmr-eu1.nanopool.org 198.251.88.16
+xmr-eu1.nanopool.org 79.137.82.104
+xmr-eu1.nanopool.org 207.154.213.72
+xmr-eu1.nanopool.org 213.32.29.143
+xmr-eu1.nanopool.org 149.202.43.126
+xmr-eu1.nanopool.org 207.154.194.32
+xmr-eu1.nanopool.org 213.32.29.168
+xmr-eu1.nanopool.org 92.222.180.118
+xmr-eu1.nanopool.org 164.132.109.110
+xmr-eu1.nanopool.org 92.222.180.119
+xmr-eu1.nanopool.org 198.251.88.21
+xmr-eu1.nanopool.org 138.197.183.116
+xmr-eu1.nanopool.org 79.137.82.5
+xmr-eu1.nanopool.org 198.251.88.14
+xmr-eu1.nanopool.org 79.137.82.70
+xmr-eu1.nanopool.org 213.32.74.230
+xmr-eu1.nanopool.org 213.32.29.150
+xmr-eu1.nanopool.org 159.89.11.225
+xmr-eu1.nanopool.org 92.222.72.197
+xmr-eu1.nanopool.org 164.132.108.171
+xmr-eu1.nanopool.org 213.32.74.157
+xmr-eu1.nanopool.org 207.154.226.213
+yescrypt.mine.zpool.ca 149.56.122.79
+pool.minexmr.com 188.165.199.78
+pool.minexmr.com 37.187.154.79
+pool.minexmr.com 37.59.43.131
+pool.minexmr.com 78.46.91.171
+pool.minexmr.com 176.31.117.82
+pool.minexmr.com 37.59.45.174
+pool.minexmr.com 94.23.212.204
+pool.minexmr.com 94.23.41.130
+pool.minexmr.com 37.59.44.193
+pool.minexmr.com 188.165.254.85
+pool.minexmr.com 94.130.164.60
+pool.minexmr.com 46.105.103.169
+pool.minexmr.com 94.23.206.130
+pool.minexmr.com 37.59.55.60
+pool.minexmr.com 78.46.89.102
+pool.minexmr.com 188.165.214.76
+pool.minexmr.com 78.46.91.134
+pool.minexmr.com 91.121.87.10
+pool.minexmr.com 37.59.54.205
+pool.minexmr.com 178.63.48.196
+monerohash.com 198.251.81.82
+monerohash.com 107.191.99.227
+mine.moneropool.com 138.201.31.12
+mine.moneropool.com 138.201.31.13
+mine.moneropool.com 138.201.31.14
+xdn.miner.center 178.63.62.94
+xmr.prohash.net 138.201.206.47
+mro.poolto.be 178.21.23.4
+ 
+ 
+ 
+ 
+ 
+ 
