@@ -41,15 +41,15 @@ case "$answer" in
 		printf "%b" "$yell=== Checking for common miner ports ==="
 		echo " "
 		printf "%b" "$gre"
-		netstat | grep -w 3333
-		netstat | grep -w 4444
-		netstat | grep -w 5555
-		netstat | grep -w 6666
-		netstat | grep -w 7777
-		netstat | grep -w 8888
-		netstat | grep -w 9999
-		netstat | grep 14444
-		netstat | grep 14433 ;;
+		netstat -tpn | grep -w 3333
+		netstat -tpn | grep -w 4444
+		netstat -tpn | grep -w 5555
+		netstat -tpn | grep -w 6666
+		netstat -tpn | grep -w 7777
+		netstat -tpn | grep -w 8888
+		netstat -tpn | grep -w 9999
+		netstat -tpn | grep 14444
+		netstat -tpn | grep 14433 ;;
 
 	2) printf "%b" "$yell=== Checking for Coinhive injections ===\n"
 		echo "This make take some time if you have many sites."
