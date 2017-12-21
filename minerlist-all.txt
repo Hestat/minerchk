@@ -72,6 +72,9 @@ kippo.eu 51.255.163.106
 cryptoescrow.eu 72.52.179.175
 xmr.hashinvest.ws 64.70.19.203
 monero.farm 192.64.119.154
+pool-nyc.supportxmr.com 104.140.201.42
+pool-nyc.supportxmr.com 104.140.244.186
+pool-nyc.supportxmr.com 104.140.201.58
  
  
  
