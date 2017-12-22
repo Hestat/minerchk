@@ -19,3 +19,4 @@ xmr-eu.nanopool.org
 xmr.hashinvest.ws
 xmr.prohash.net
 yescrypt.mine.zpool.ca
+xmr-eu1.nanopool.org
