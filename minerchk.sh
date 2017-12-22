@@ -74,30 +74,11 @@ case "$answer" in
 		find /var/www/vhosts/*/httpdocs -name coinhive.min.js 2> /dev/null;;
 	3) printf "%b" "$yell === Mining domains will be added to hosts file to prevent DNS lookup ===\n"
 		printf "%b" "$gre"
-		echo "blocking cryptoescrow.eu cryptonotepool.org fcn-mro.pool.minergate.com kippo.eu mine.moneropool.com monero.crypto-pool.fr monero.farm monerohash.com monerominers.net mro.extremeool.org mro.poolto.be pool.minexmr.com webcoin.me xdn.miner.center xmr.crypto-pool.fr xmr-eu.nanopool.org xmr.hashinvest.ws xmr.prohash.net yescrypt.mine.zpool.ca"
-		echo "127.0.0.1 xmr.crypto-pool.fr" >> /etc/hosts
-		echo "127.0.0.1 xmr-eu1.nanopool.org" >> /etc/hosts
-		echo "127.0.0.1 yescrypt.mine.zpool.ca" >> /etc/hosts
-		echo "127.0.0.1 pool.minexmr.com" >> /etc/hosts
-		echo "127.0.0.1 monerohash.com" >> /etc/hosts 
-		echo "127.0.0.1 mine.moneropool.com" >> /etc/hosts 
-		echo "127.0.0.1 xdn.miner.center" >> /etc/hosts 
-		echo "127.0.0.1 xmr.prohash.net" >> /etc/hosts 
-		echo "127.0.0.1 mro.poolto.be" >> /etc/hosts 
-		echo "127.0.0.1 monero.crypto-pool.fr" >> /etc/hosts 
-		echo "127.0.0.1 cryptoescrow.eu" >> /etc/hosts 
-		echo "127.0.0.1 monerominers.net" >> /etc/hosts 
-		echo "127.0.0.1 fcn-mro.pool.minergate.com" >> /etc/hosts 
-		echo "127.0.0.1 cryptonotepool.org" >> /etc/hosts 
-		echo "127.0.0.1 mro.extremeool.org" >> /etc/hosts 
-		echo "127.0.0.1 mro.poolto.be" >> /etc/hosts 
-		echo "127.0.0.1 webcoin.me" >> /etc/hosts 
-		echo "127.0.0.1 monerominers.net" >> /etc/hosts 
-		echo "127.0.0.1 kippo.eu" >> /etc/hosts 
-		echo "127.0.0.1 cryptoescrow.eu" >> /etc/hosts 
-		echo "127.0.0.1 xmr.hashinvest.ws" >> /etc/hosts 
-		echo "127.0.0.1 monero.farm" >> /etc/hosts 
-		echo "127.0.0.1 pool.supportxmr.com" >> /etc/hosts ;;
+		hostlist=$(curl https://raw.githubusercontent.com/Hestat/minerchk/master/hostslist.txt)		
+		for domain in $hostlist; do
+ 		echo "Blocking $domain in /etc/hosts.."
+ 		echo "127.0.0.1 $domain" >> /etc/hosts
+		done;;
 	4) exit ;;
 
 esac
