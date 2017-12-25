@@ -1,0 +1,4 @@
+coinhive.min.js
+wpupdates.github.io/ping
+cryptonight.asm.js
+coin-hive.com
