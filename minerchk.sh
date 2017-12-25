@@ -48,30 +48,62 @@ case "$answer" in
 		printf "%b" "$yell=== Checking for common miner ports ==="
 		echo " "
 		printf "%b" "$gre"
-		netstat -tpn | grep -w 3333
-		netstat -tpn | grep -w 4444
-		netstat -tpn | grep -w 5555
-		netstat -tpn | grep -w 6666
-		netstat -tpn | grep -w 7777
-		netstat -tpn | grep -w 8888
-		netstat -tpn | grep -w 9999
-		netstat -tpn | grep 14444
-		netstat -tpn | grep 14433 
+		portlist=$(curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/portlist.txt)
+		for port in $portlist; do 
+ 		netstat -tpn | grep -w $port;
+		done
 		rm -f proctemp;;
 
 	2) printf "%b" "$yell=== Checking for Coinhive injections ===\n"
 		echo "This make take some time if you have many sites."
 		echo " "
 		printf "%b" "$gre"
-		for x in $(find /home/*/public_html/ -type f -name '*.php'); do egrep -Hw 'coinhive.min.js|wpupdates.github.io/ping|cryptonight.asm.js|coin-hive.com' $x; 
-		done 2> /dev/null
-		for x in $(find /var/www/html -type f -name '*.php'); do egrep -Hw 'coinhive.min.js|wpupdates.github.io/ping|cryptonight.asm.js|coin-hive.com' $x; 
-		done 2> /dev/null
-		for x in $(find /var/www/vhosts/*/httpdocs -type f -name '*.php'); do egrep -Hw 'coinhive.min.js|wpupdates.github.io/ping|cryptonight.asm.js|coin-hive.com' $x;
-		done 2> /dev/null
-		find /home/*/public_html -name coinhive.min.js 2> /dev/null
-		find /var/www/html -name coinhive.min.js 2> /dev/null
-		find /var/www/vhosts/*/httpdocs -name coinhive.min.js 2> /dev/null;;
+		#coinhive module
+		# Author: Mark David Scott Cunningham                      | M  | D  | S  | C  |
+		#                                                          +----+----+----+----+
+		# Created: 2017-12-24
+		# Updated: 2017-12-24
+		#
+		# Purpose: To scan for files injected with coinhive content and coinhive .js files
+		#          Based on work by Brian Laskowski, intended to assist Brian.
+		coin=$(curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/coinhive.txt)
+		# Define the scan function
+		coinhivescan(){
+
+ 		 # Use the positional parameter to define directory location, and build list
+  		dirlist=$(find $1 -maxdepth 0 -type d -print)
+
+  		# Loop through list of directories
+  		for account in $dirlist; do
+    		echo "Scanning :: $account"
+
+    			for coiners in $coin; do
+			# Build filelist per user/site directory, and search files in the filelist for coinhive
+    			find $account -type f -name '*.php' -print0 | xargs -0 egrep -Hw $coiners  2>/dev/null;
+			done
+
+    		# Search for any actual .js files
+    		find $account -name coinhive.min.js 2> /dev/null
+
+  		done; echo
+ 		 }
+	 		 
+
+
+		# Check for common control panels / configurations
+		if [[ -x $(which whmapi1) ]]; then #cPanel
+  		printf "%b" "cPanel detected\n"
+  		coinhivescan "/home*/*/public_html/"
+
+		elif [[ -x $(which plesk) ]]; then #Plesk
+  		printf "%b" "Plesk detected\n"
+  		coinhivescan "/var/www/vhosts/*/httpdocs/"
+
+		else #Core-Managed
+  		printf "%b"  "Unknown control panel, assuming Apache defaults\n"
+  		coinhivescan "/var/www/html/"
+		fi;;
+
 	3) printf "%b" "$yell === Mining domains will be added to hosts file to prevent DNS lookup ===\n"
 		printf "%b" "$gre"
 		hostlist=$(curl https://raw.githubusercontent.com/Hestat/minerchk/master/hostslist.txt)		
