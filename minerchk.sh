@@ -77,10 +77,7 @@ case "$answer" in
   		for account in $dirlist; do
     		echo "Scanning :: $account"
 
-    			for coiners in $coin; do
-			# Build filelist per user/site directory, and search files in the filelist for coinhive
-    			find $account -type f -name '*.php' -print0 | xargs -0 egrep -Hw $coiners  2>/dev/null;
-			done
+    		find $account -type f -name '*.php' -print0 | xargs -0 egrep -Hw "$coin"  2>/dev/null;
 
     		# Search for any actual .js files
     		find $account -name coinhive.min.js 2> /dev/null
