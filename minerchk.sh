@@ -13,7 +13,7 @@ clear
 	echo " "
 	echo " "
 	echo "============================"
-	echo "--   Miner Check alpha    --"
+	echo "--   Miner Check beta v1.0    --"
 	echo "============================"
 	echo "Enter 1 to run miner checks on server."
 	echo  " "
@@ -42,7 +42,7 @@ case "$answer" in
 		printf "%b" "$gre"
 		echo " "
 		ps fauwx | grep minerd | grep -v 'grep minerd'
-		ps faux | grep $proc | grep -v 'grep'
+		ps faux | grep $proc 2> /dev/null | grep -v 'grep' 2> /dev/null
 		ps fauwx | grep xmrig | grep -v 'grep xmrig'
 		echo " "
 		printf "%b" "$yell=== Checking for common miner ports ==="
@@ -52,7 +52,44 @@ case "$answer" in
 		for port in $portlist; do 
  		netstat -tpn | grep -w $port;
 		done
-		rm -f proctemp;;
+		rm -f proctemp
+		echo " "
+		printf "%b" "$yell=== Checking for miners in site files  ===" 
+		printf "%b" "$gre"
+		echo " "
+		# Adapted from Mark Cunningham module
+		# Scan of Sites for on server miners in site files
+		# Define the scan function
+		sitescan(){
+
+ 		 # Use the positional parameter to define directory location, and build list
+  		dirlist=$(find $1 -maxdepth 0 -type d -print)
+
+  		# Loop through list of directories
+  		for account in $dirlist; do
+    		echo "Scanning :: $account"
+
+		 grep -wiR 'stratum+tcp' $account  2>/dev/null;
+
+  		done; echo
+ 		 }
+	 		 
+
+
+		# Check for common control panels / configurations
+		if [[ -x $(which whmapi1) ]] 2> /dev/null ; then #cPanel
+  		printf "%b" "cPanel detected\n"
+  		sitescan "/home*/*/public_html/"
+
+		elif [[ -x $(which plesk) ]] 2> /dev/null; then #Plesk
+  		printf "%b" "Plesk detected\n"
+  		sitescan "/var/www/vhosts/*/httpdocs/"
+
+		else #Core-Managed
+  		printf "%b"  "Unknown control panel, assuming Apache and Nginx defaults\n"
+  		sitescan "/var/www/html/"
+		sitescan "/usr/share/nginx/"
+		fi;;
 
 	2) printf "%b" "$yell=== Checking for Coinhive injections ===\n"
 		echo "This make take some time if you have many sites."
@@ -88,17 +125,18 @@ case "$answer" in
 
 
 		# Check for common control panels / configurations
-		if [[ -x $(which whmapi1) ]]; then #cPanel
+		if [[ -x $(which whmapi1) ]] 2> /dev/null; then #cPanel
   		printf "%b" "cPanel detected\n"
   		coinhivescan "/home*/*/public_html/"
 
-		elif [[ -x $(which plesk) ]]; then #Plesk
+		elif [[ -x $(which plesk) ]] 2> /dev/null; then #Plesk
   		printf "%b" "Plesk detected\n"
   		coinhivescan "/var/www/vhosts/*/httpdocs/"
 
 		else #Core-Managed
-  		printf "%b"  "Unknown control panel, assuming Apache defaults\n"
+  		printf "%b"  "Unknown control panel, assuming Apache and Nginx defaults\n"
   		coinhivescan "/var/www/html/"
+		coinhivescan "/usr/share/nginx/"
 		fi;;
 
 	3) printf "%b" "$yell === Mining domains will be added to hosts file to prevent DNS lookup ===\n"
