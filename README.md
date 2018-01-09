@@ -1,6 +1,8 @@
 # minerchk
 Bash script to Check for malicious Cryptomining
 
+See the script in action here: https://laskowski-tech.com/2018/01/08/minerchk-beta-announcement/
+
 Download and set up for the root user:
 
 `mkdir -p /root/bin`
