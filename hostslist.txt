@@ -1,8 +1,9 @@
-
 cryptoescrow.eu
 cryptonotepool.org
 fcn-mro.pool.minergate.com
+hash-to-coins.com
 kippo.eu
+linux-repository-updates.com
 mine.moneropool.com
 monero.crypto-pool.fr
 monero.farm
@@ -13,10 +14,14 @@ mro.poolto.be
 pool.minexmr.com
 pool-nyc.supportxmr.com
 webcoin.me
+xcnpool2.1gh.com
 xdn.miner.center
 xmr.crypto-pool.fr
+xmr-eu1.nanopool.org
+xmr-eu.dwarfpool.com
 xmr-eu.nanopool.org
 xmr.hashinvest.ws
+xmrpool.eu
+xmr.pool.minergate.com
 xmr.prohash.net
 yescrypt.mine.zpool.ca
-xmr-eu1.nanopool.org
