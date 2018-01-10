@@ -98,8 +98,25 @@ xmr-eu1.nanopool.org #198.251.88.21
 xmr-eu1.nanopool.org #198.251.88.14
 xmr-eu1.nanopool.org #213.32.74.157
 xmr-eu1.nanopool.org #164.132.108.171
- #
- #
+xmr.pool.minergate.com #136.243.102.157
+xmr.pool.minergate.com #94.130.64.225
+xmr.pool.minergate.com #94.130.48.154
+xmr.pool.minergate.com #136.243.94.27
+xmr.pool.minergate.com #78.46.23.253
+xmr.pool.minergate.com #176.9.0.89
+xmr.pool.minergate.com #46.4.120.155
+xmr.pool.minergate.com #136.243.88.145
+xmr.pool.minergate.com #176.9.47.243
+xmr.pool.minergate.com #176.9.147.178
+xmr.pool.minergate.com #94.130.9.194
+xmrpool.eu #94.23.251.22
+xmrpool.eu #176.31.105.53
+linux-repository-updates.com #146.0.77.83
+xcnpool2.1gh.com #192.99.14.195
+xmr-eu.dwarfpool.com #79.137.57.106
+xmr-eu.dwarfpool.com #178.32.145.31
+xmr-eu.dwarfpool.com #178.32.196.217
+hash-to-coins.com #88.99.68.228
  #
  #
  #
