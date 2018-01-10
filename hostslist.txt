@@ -18,6 +18,7 @@ xcnpool2.1gh.com
 xdn.miner.center
 xmr.crypto-pool.fr
 xmr-eu1.nanopool.org
+xmr-eu2.nanopool.org.
 xmr-eu.dwarfpool.com
 xmr-eu.nanopool.org
 xmr.hashinvest.ws
