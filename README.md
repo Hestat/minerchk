@@ -10,3 +10,8 @@ Download and set up for the root user:
 `wget -O /root/bin/minerchk https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh`
 
 `chmod +x /root/bin/minerchk`
+
+
+Run once without installing script
+
+`exec 3<&1 && bash <&3 <(curl -sq https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh)`
