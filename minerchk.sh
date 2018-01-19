@@ -13,7 +13,7 @@ clear
 	echo " "
 	echo " "
 	echo "============================"
-	echo "--   Miner Check beta v1.0    --"
+	echo "--   Miner Check beta v1.1    --"
 	echo "============================"
 	echo "Enter 1 to run miner checks on server."
 	echo  " "
@@ -21,7 +21,9 @@ clear
 	echo  " "
 	echo "Enter 3 to innoculate server"
 	echo " "
-	echo "Enter 4 to quit"
+	echo "Enter 4 to check version"
+	echo " "
+	echo "Enter 5 to quit"
 
 read answer
 case "$answer" in
@@ -44,6 +46,7 @@ case "$answer" in
 		ps fauwx | grep minerd | grep -v 'grep minerd'
 		ps faux | grep $proc 2> /dev/null | grep -v 'grep' 2> /dev/null
 		ps fauwx | grep xmrig | grep -v 'grep xmrig'
+		ps fauwx | grep xmr | grep -v 'grep xmr'
 		echo " "
 		printf "%b" "$yell=== Checking for common miner ports ==="
 		echo " "
@@ -146,7 +149,17 @@ case "$answer" in
  		echo "Blocking $domain in /etc/hosts.."
  		echo "127.0.0.1 $domain" >> /etc/hosts
 		done;;
-	4) exit ;;
+
+	4) 	echo " "
+		printf "%b" "$yell"
+		echo " Local Version "
+		grep "Miner Check" ./minerchk.sh | grep -v 'grep "Miner Check"' | awk '{print$6}'
+		echo " "
+		printf "%b" "$gre"
+		echo " Current Version "
+		curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | grep "Miner Check" ./minerchk.sh | grep -v 'grep "Miner Check"'| awk '{print$6}';;
+
+	5) exit ;;
 
 esac
 echo " "
