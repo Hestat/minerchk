@@ -13,7 +13,7 @@ clear
 	echo " "
 	echo " "
 	echo "============================"
-	echo "--   Miner Check beta v1.1    --"
+	echo "--   Miner Check beta v1.2    --"
 	echo "============================"
 	echo "Enter 1 to run miner checks on server."
 	echo  " "
@@ -142,13 +142,24 @@ case "$answer" in
 		coinhivescan "/usr/share/nginx/"
 		fi;;
 
-	3) printf "%b" "$yell === Mining domains will be added to hosts file to prevent DNS lookup ===\n"
-		printf "%b" "$gre"
-		hostlist=$(curl https://raw.githubusercontent.com/Hestat/minerchk/master/hostslist.txt)		
-		for domain in $hostlist; do
- 		echo "Blocking $domain in /etc/hosts.."
- 		echo "127.0.0.1 $domain" >> /etc/hosts
-		done;;
+	3) 	if [[ -x $(which csf) ]] 2> /dev/null; then #CSF	
+			printf "%b" "$gre" "Config Server Firewall Detected\n"
+			echo " " >> /etc/csf/csf.blocklists
+			echo "#Minerchk" >> /etc/csf/csf.blocklists
+			echo "#list to block known Monero miner pools" >> /etc/csf/csf.blocklists
+			echo "Minerchk|86400|0|https://raw.githubusercontent.com/Hestat/minerchk/master/ip-only.txt" >> /etc/csf/csf.blocklists
+			service csf restart
+			service lfd restart
+
+		else #Not CSF
+			printf "%b" "$yell === Mining domains will be added to hosts file to prevent DNS lookup ===\n"
+			hostlist=$(curl https://raw.githubusercontent.com/Hestat/minerchk/master/hostslist.txt)		
+			printf "%b" "$gre"
+			for domain in $hostlist; do
+ 			echo "Blocking $domain in /etc/hosts.."
+ 			echo "127.0.0.1 $domain" >> /etc/hosts
+		done
+	fi;;
 
 	4) 	echo " "
 		printf "%b" "$yell"
