@@ -137,3 +137,11 @@ xmr-eu2.nanopool.org  #92.222.180.119
 xmr-eu2.nanopool.org  #217.182.65.224
 xmr-eu2.nanopool.org  #149.202.57.197
 xmr-eu2.nanopool.org  #149.202.43.126
+pool-vegas.xmrpool.net #199.231.85.124
+pool-vegas.xmrpool.net #162.213.38.63
+mine.sumo.fairpool.cloud
+cloudflare.hashfor.cash #213.32.34.39
+litecoinpool.org #149.210.234.234
+litecoinpool.org #88.80.187.187
+
+
