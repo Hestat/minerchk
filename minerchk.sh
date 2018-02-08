@@ -13,7 +13,7 @@ clear
 	echo " "
 	echo " "
 	echo "============================"
-	echo "--   Miner Check beta v1.2    --"
+	echo "--   Miner Check beta v1.21    --"
 	echo "============================"
 	echo "Enter 1 to run miner checks on server."
 	echo  " "
@@ -164,11 +164,21 @@ case "$answer" in
 	4) 	echo " "
 		printf "%b" "$yell"
 		echo " Local Version "
-		grep "Miner Check" ./minerchk.sh | grep -v 'grep "Miner Check"' | awk '{print$6}'
-		echo " "
-		printf "%b" "$gre"
-		echo " Current Version "
-		curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | grep "Miner Check" ./minerchk.sh | grep -v 'grep "Miner Check"'| awk '{print$6}';;
+		version=$(which minerchk)
+		if [[ -x $(which minerchk) ]] 2> /dev/null; then #installed
+			cat $version | grep "Miner Check" | grep -v 'grep "Miner Check"' | awk '{print$6}'
+			echo " "
+			printf "%b" "$gre"
+			echo " Current Version "
+			curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | grep "Miner Check" | grep -v 'grep "Miner Check"'| awk '{print$6}'
+		else #not installed
+			printf "%b" "$yell"
+			echo " Not Installed "
+			echo " "
+			printf "%b" "$gre"
+			echo " Current Version "
+			curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | grep "Miner Check" | grep -v 'grep "Miner Check"'| awk '{print$6}'
+	fi;;
 
 	5) exit ;;
 
