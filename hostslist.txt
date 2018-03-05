@@ -13,10 +13,12 @@ monero.crypto-pool.fr
 monero.farm
 monerohash.com
 monerominers.net
-mro.extremeool.org
+mro.extrmepool.org
 mro.poolto.be
 pool.minexmr.com
 pool-nyc.supportxmr.com
+pool-proxy.com
+pool.sumokoin.hashvault.pro
 pool-vegas.xmrpool.net
 webcoin.me
 xcnpool2.1gh.com
