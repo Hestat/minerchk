@@ -9,7 +9,9 @@ Download and set up for the root user:
 
  `wget -O /usr/local/minerchk/minerchk https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh`
 
- `chmod +x /usr/local/minerchk`
+ `chmod +x /usr/local/minerchk/minerchk`
+ 
+  `ln -s /usr/local/bin/ /usr/local/minerchk/minerchk`
 
 
 Run once without installing script
