@@ -5,11 +5,11 @@ See the script in action here: https://laskowski-tech.com/2018/01/08/minerchk-be
 
 Download and set up for the root user:
 
-`mkdir -p /root/bin`
+ `mkdir /usr/local/minerchk`
 
-`wget -O /root/bin/minerchk https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh`
+ `wget -O /usr/local/minerchk/minerchk https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh`
 
-`chmod +x /root/bin/minerchk`
+ `chmod +x /usr/local/minerchk`
 
 
 Run once without installing script
