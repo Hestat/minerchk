@@ -11,7 +11,7 @@ Download and set up for the root user:
 
  `chmod +x /usr/local/minerchk/minerchk`
  
-  `ln -s /usr/local/bin/ /usr/local/minerchk/minerchk`
+  `ln -s /usr/local/minerchk/minerchk /usr/local/bin/minerchk`
 
 
 Run once without installing script
