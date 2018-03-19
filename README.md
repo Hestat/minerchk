@@ -3,7 +3,7 @@ Bash script to Check for malicious Cryptomining
 
 See the script in action here: https://laskowski-tech.com/2018/01/08/minerchk-beta-announcement/
 
-Download and set up for the root user:
+Download and set up:
 
  `mkdir /usr/local/minerchk`
 
