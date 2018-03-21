@@ -145,4 +145,7 @@ cloudflare.hashfor.cash	#51.254.238.27
 mine.sumo.fairpool.cloud
 litecoinpool.org #88.80.187.187
 litecoinpool.org #149.210.234.234
+mineshaft.ml #212.38.166.145
+proxy.mineshaft.ml #212.38.166.145
+app.abcxyz.stream #201.11.66.100
 
