@@ -33,3 +33,6 @@ xmrpool.eu
 xmr.pool.minergate.com
 xmr.prohash.net
 yescrypt.mine.zpool.ca
+proxy.mineshaft.ml
+mineshaft.ml
+app.abcxyz.stream
