@@ -69,7 +69,7 @@ clear
 	echo
 	echo
 	header $@
-	echo "  --   Miner Check beta v1.35    --"
+	echo "  --   Miner Check beta v1.36    --"
 	header $@
 	echo "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)"
 	echo 
@@ -240,7 +240,8 @@ case "$answer" in
 		chmod +x /usr/local/minerchk/minerchk 2> /dev/null
 		ln -s /usr/local/minerchk/minerchk /usr/local/bin/minerchk 2> /dev/null
 		echo
-		echo -e "$header2 Update Successful! $header2 $whi"
+		echo -e "$header2 Update Successful! $header2"
+		echo -e " Please restart Minerchk now $whi"
 	else echo
 		echo -e "$yell $header2 Something went wrong, try a manual reinstall $header2 $whi"	
 	fi;;
