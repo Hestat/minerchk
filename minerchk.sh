@@ -16,6 +16,9 @@ log2=/tmp/minerchk.report
 
 #remote logging via sendmail
 remotelog=$(cat /usr/local/minerchk/remotelog)
+if [[ -x $(stat /usr/local/minerchk/remotelog) ]]; then
+	wget -O /usr/local/minerchk/remotelog https://raw.githubusercontent.com/Hestat/minerchk/master/remotelog
+fi
 
 #create formatting
 div(){
@@ -76,7 +79,7 @@ clear
 	echo
 	echo "Enter 4 to innoculate server (Blocks domains and IP's used to mine)"
 	echo
-	echo "Enter 5 to check version"
+	echo "Enter 5 to run updates"
 	echo
 	echo "Enter 6 to report logs"
 	echo
