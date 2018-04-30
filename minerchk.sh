@@ -14,6 +14,19 @@ log="${logdir}/miner.$(date +%y%m%d-%H%M).log"
 log1="${logdir}/coinhive.$(date +%y%m%d-%H%M).log"
 log2=/tmp/minerchk.report
 
+#create formatting
+div(){
+  for ((i=0;i<$1;i++)); do printf '='; done;
+}
+
+header(){
+	echo -e "\n$(div 12)${@}$(div 12)\n"
+}
+
+header2=$(echo "===")
+
+scanhead=$(echo -e "\n$gre Scanning ::\n")
+
 #drop environment data into logs for easier identification
 hostname > $log
 echo "========================== " >> $log
@@ -26,71 +39,57 @@ while true
 do
 clear
 	printf "%b" "\n\e[0m"
-	echo " "
-	echo " "
-	echo "============================"
-	echo "--   Miner Check beta v1.3    --"
-	echo "============================"
+	echo
+	echo
+	header $@
+	echo "--   Miner Check beta v1.31    --"
+	header $@
 	echo "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)"
-	echo  " "
+	echo 
 	echo "Enter 2 to run deep miner checks through site files"
-	echo " "
+	echo
 	echo "Enter 3 to run checks for miners embeded in websites (Crypto-jacking)"
-	echo  " "
+	echo
 	echo "Enter 4 to innoculate server (Blocks domains and IP's used to mine)"
-	echo " "
+	echo
 	echo "Enter 5 to check version"
-	echo " "
+	echo
 	echo "Enter 6 to report logs"
-	echo " "
+	echo
 	echo "Enter 7 to quit"
 
 read answer
 case "$answer" in
 
 
-	1) printf "%b" "$yell=== Checking for miners in /tmp ===" 
-		printf "%b" "$gre"
-		echo " "
-		echo "Scanning ::"
+	1) echo -e "$yell $header2 Checking for miners in /tmp $header2" 
+		echo $scanhead
 	        grep -R 'stratum+tcp' /tmp 1>> $log 2> /dev/null
 		grep -R 'stratum+tcp' /dev/shm 1>> $log 2> /dev/null
-	        grep -R 'stratum+tcp' /tmp > proctemp 2> /dev/null
-		grep -R 'stratum+tcp' /dev/shm > proctemp 2> /dev/null
-		proc=$(cat proctemp | cut -d '/' -f 4 | awk '{print$1}' | head -n1 | cut -d ':' -f1) >> $log
-		echo " "
-		printf "%b" "$yell=== Checking for miners in running processes ==="
-		echo " "
-		printf "%b" "$gre"
-		echo "Scanning ::"
-		echo " "
+		echo -e "$yell $header2 Checking for miners in running processes $header2"
+		echo
+		echo $scanhead
+		echo
 		ps fauwx | grep minerd | grep -v 'grep minerd' 1>> $log 2> /dev/null
-		ps faux | grep $proc 2> /dev/null | grep -v 'grep' 1>> $log 2> /dev/null
 		ps fauwx | grep xmrig | grep -v 'grep xmrig' 1>> $log 2> /dev/null
 		ps fauwx | grep xmr | grep -v 'grep xmr' 1>> $log 2> /dev/null
-		echo " "
-		printf "%b" "$yell=== Checking for common miner ports ==="
-		echo " "
-		printf "%b" "$gre"
-		echo "Scanning ::"
+		echo
+		echo -e "$yell $header2  Checking for common miner ports $header2"
+		echo
+		echo $scanhead
 		portlist=$(curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/portlist.txt)
 		for port in $portlist; do 
  		netstat -tpn | grep -w $port 1>> $log 2> /dev/null;
 		done
-		rm -f proctemp
-		printf "%b" "$yell"
-		echo "=== Current Scan Results logged in the following file ==="
-		printf "%b" "$gre"
+		echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
 		echo $log
-		printf "%b" "$yell"
-		echo "=== Hits in the Scan ==="
-		printf "%b" "$gre"
+		echo -e "$yell $header2 Hits in the Scan $header2 $gre"
 		cat $log;;
 
 	2)
 		printf "%b" "$yell=== Checking for miners in site files  ===" 
 		printf "%b" "$gre"
-		echo " "
+		echo
 		# Adapted from Mark Cunningham module
 		# Scan of Sites for on server miners in site files
 		# Define the scan function
@@ -101,10 +100,9 @@ case "$answer" in
 
   		# Loop through list of directories
   		for account in $dirlist; do
-    		echo "Scanning :: $account"
+    		echo $scanhead
 
-		 grep -wiR 'stratum+tcp' $account 1>> $log 2>/dev/null
-		 egrep -wir 'xmrig' $account 1>>$log 2>/dev/null;
+		 grep -wiR 'stratum+tcp' $account 1>> $log 2>/dev/null;
 
   		done; echo
  		 }
@@ -125,20 +123,15 @@ case "$answer" in
   		sitescan "/var/www/html/" 2> /dev/null
 		sitescan "/usr/share/nginx/" 2> /dev/null
 		fi
-		printf "%b" "$yell"
-		echo "=== Current Scan Results logged in the following file ==="
-		printf "%b" "$gre"
+		echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
 		echo $log
-		printf "%b" "$yell"
-		echo "=== Hits in the Scan ==="
-		printf "%b" "$gre"
+		echo -e "$yell $header2 Hits in the Scan $header2 $gre"
 		cat $log;;
 
-	3) printf "%b" "$yell=== Checking for Crypto-jacking injections ===\n"
+	3) echo -e "$yell $header2 Checking for Crypto-jacking injections $header2 $gre\n"
 		echo "This make take some time if you have many sites."
-		echo " "
+		echo
 		touch $log1
-		printf "%b" "$gre"
 		#coinhive module
 		# Author: Mark David Scott Cunningham                      | M  | D  | S  | C  |
 		#                                                          +----+----+----+----+
@@ -184,17 +177,13 @@ case "$answer" in
   		coinhivescan "/var/www/html/" 2> /dev/null
 		coinhivescan "/usr/share/nginx/" 2> /dev/null
 		fi
-                printf "%b" "$yell"
-                echo "=== Current Scan Results logged in the following file ==="
-                printf "%b" "$gre"
+                echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
                 echo $log1
-                printf "%b" "$yell"
-                echo "=== Hits in the Scan ==="
-                printf "%b" "$gre"
+                echo -e "$yell $header2 Hits in the Scan $header2 $gre"
                 cat $log1;;
 
 	4) 	if [[ -x $(which csf) ]] 2> /dev/null; then #CSF	
-			printf "%b" "$gre" "Config Server Firewall Detected\n"
+			echo -e "$gre" "Config Server Firewall Detected\n"
 			echo " " >> /etc/csf/csf.blocklists
 			echo "#Minerchk" >> /etc/csf/csf.blocklists
 			echo "#list to block known Monero miner pools" >> /etc/csf/csf.blocklists
@@ -203,36 +192,30 @@ case "$answer" in
 			service lfd restart
 
 		else #Not CSF
-			printf "%b" "$yell === Mining domains will be added to hosts file to prevent DNS lookup ===\n"
+			echo -e "$yell $header2 Mining domains will be added to hosts file to prevent DNS lookup $header2 $gre\n"
 			hostlist=$(curl https://raw.githubusercontent.com/Hestat/minerchk/master/hostslist.txt)		
-			printf "%b" "$gre"
 			for domain in $hostlist; do
  			echo "Blocking $domain in /etc/hosts.."
  			echo "127.0.0.1 $domain" >> /etc/hosts
 		done
 	fi;;
 
-	5) 	echo " "
-		printf "%b" "$yell"
-		echo " Local Version "
+	5) 	echo 
+		echo -e "$yell Local Version "
 		version=$(which minerchk)
 		if [[ -x $(which minerchk) ]] 2> /dev/null; then #installed
 			cat $version | grep "Miner Check" | grep -v 'grep "Miner Check"' | awk '{print$6}'
 			echo " "
-			printf "%b" "$gre"
-			echo " Current Version "
+			echo -e "$gre Current Version "
 			curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | grep "Miner Check" | grep -v 'grep "Miner Check"'| awk '{print$6}'
 		else #not installed
-			printf "%b" "$yell"
-			echo " Not Installed "
+			echo -e "$yell Not Installed "
 			echo " "
-			printf "%b" "$gre"
-			echo " Current Version "
+			echo -e "$gre Current Version "
 			curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | grep "Miner Check" | grep -v 'grep "Miner Check"'| awk '{print$6}'
 	fi;;
 	
-	6) 	printf "%b" "$yell"
-		echo "=== Sending Log Data ==="
+	6) 	echo -e "$yell $header2 Sending Log Data $header2"
 		cat $log >> $log2
 		echo "========================== " >> $log2
 		cat $log1 >> $log2
@@ -244,8 +227,8 @@ case "$answer" in
 		exit ;;
 
 esac
-echo " "
-echo " "
+echo
+echo
 printf "%b" "$whi Enter to return to the menu \c"
 	read input
 
