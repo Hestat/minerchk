@@ -20,12 +20,33 @@ div(){
 }
 
 header(){
-	echo -e "\n$(div 12)${@}$(div 12)\n"
+	echo -e "\n$(div 20)${@}$(div 20)\n"
 }
 
 header2=$(echo "===")
 
 scanhead=$(echo -e "\n$gre Scanning ::\n")
+
+#check yara signatures
+remotesig1=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/miners.yar | md5sum | awk '{print$1}')
+localsig1=$(md5sum /usr/local/minerchk/miners.yar | awk '{print$1}')
+if [[ "$remotesig1" =  "$localsig1" ]]; then
+	echo -e "$gre Local Signatures up to date $whi"
+	sleep 1
+else echo -e "$gre Updating signatures $whi"
+	wget -O /usr/local/minerchk/miners.yar https://raw.githubusercontent.com/Hestat/minerchk/master/miners.yar
+	sleep 1
+fi
+
+#check if minerchk is up to date
+remoteprogsig=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | md5sum | awk '{print$1}')
+localprogsig=$(md5sum /usr/local/minerchk/minerchk | awk '{print$1}')
+if [[ "$remoteprogsig" = "$localprogsig" ]]; then
+	echo -e "$gre Minerchk is up to date $whi"
+	sleep 1
+else echo -e "$yell Newer version of Minerchk available, please use option 5 to update"
+	sleep 10
+fi
 
 #drop environment data into logs for easier identification
 hostname > $log
@@ -205,19 +226,17 @@ case "$answer" in
 		done
 	fi;;
 
-	5) 	echo 
-		echo -e "$yell Local Version "
-		version=$(which minerchk)
-		if [[ -x $(which minerchk) ]] 2> /dev/null; then #installed
-			cat $version | grep "Miner Check" | grep -v 'grep "Miner Check"' | awk '{print$6}'
-			echo " "
-			echo -e "$gre Current Version "
-			curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | grep "Miner Check" | grep -v 'grep "Miner Check"'| awk '{print$6}'
-		else #not installed
-			echo -e "$yell Not Installed "
-			echo " "
-			echo -e "$gre Current Version "
-			curl -s https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | grep "Miner Check" | grep -v 'grep "Miner Check"'| awk '{print$6}'
+	5) 	echo
+	        echo -e "$yell $header2 Updating Minerchk $header2 $gre"
+       		wget -O /usr/local/minerchk/minerchk https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh
+ 		newlocalprogsig=$(md5sum /usr/local/minerchk/miners.yar | awk '{print$1}')
+		if [[ "$newlocalprogsig" = "$remoteprogsig" ]]; then
+		chmod +x /usr/local/minerchk/minerchk 2> /dev/null
+		ln -s /usr/local/minerchk/minerchk /usr/local/bin/minerchk 2> /dev/null
+		echo
+		echo -e "$header2 Update Successful! $header2 $whi"
+	else echo
+		echo -e "$yell $header2 Something went wrong, try a manual reinstall $header2 $whi"	
 	fi;;
 	
 	6) 	echo -e "$yell $header2 Sending Log Data $header2"
