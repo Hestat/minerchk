@@ -42,7 +42,7 @@ clear
 	echo
 	echo
 	header $@
-	echo "--   Miner Check beta v1.31    --"
+	echo "--   Miner Check beta v1.32    --"
 	header $@
 	echo "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)"
 	echo 
@@ -102,7 +102,12 @@ case "$answer" in
   		for account in $dirlist; do
     		echo $scanhead
 
-		 grep -wiR 'stratum+tcp' $account 1>> $log 2>/dev/null;
+		if [[ -x $(which clamscan) ]] 2> /dev/null; then #use clamav and yara
+			echo -e "$gre ClamAV installed using clamscan for scanning \n"
+			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar $account
+			else	
+			grep -wiR 'stratum+tcp' $account 1>> $log 2>/dev/null;
+		fi
 
   		done; echo
  		 }
