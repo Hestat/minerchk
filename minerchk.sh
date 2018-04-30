@@ -63,7 +63,7 @@ clear
 	echo
 	echo
 	header $@
-	echo "--   Miner Check beta v1.33    --"
+	echo "--   Miner Check beta v1.34    --"
 	header $@
 	echo "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)"
 	echo 
