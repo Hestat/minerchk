@@ -69,7 +69,7 @@ clear
 	echo
 	echo
 	header $@
-	echo "  --   Miner Check beta v1.36    --"
+	echo "  --   Miner Check beta v1.37    --"
 	header $@
 	echo "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)"
 	echo 
@@ -235,7 +235,7 @@ case "$answer" in
 	5) 	echo
 	        echo -e "$yell $header2 Updating Minerchk $header2 $gre"
        		wget -O /usr/local/minerchk/minerchk https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh
- 		newlocalprogsig=$(md5sum /usr/local/minerchk/minerchk.sh | awk '{print$1}')
+ 		newlocalprogsig=$(md5sum /usr/local/minerchk/minerchk | awk '{print$1}')
 		if [[ "$newlocalprogsig" = "$remoteprogsig" ]]; then
 		chmod +x /usr/local/minerchk/minerchk 2> /dev/null
 		ln -s /usr/local/minerchk/minerchk /usr/local/bin/minerchk 2> /dev/null
