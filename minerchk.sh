@@ -14,6 +14,9 @@ log="${logdir}/miner.$(date +%y%m%d-%H%M).log"
 log1="${logdir}/coinhive.$(date +%y%m%d-%H%M).log"
 log2=/tmp/minerchk.report
 
+#remote logging via sendmail
+remotelog=$(cat /usr/local/minerchk/remotelog)
+
 #create formatting
 div(){
   for ((i=0;i<$1;i++)); do printf '='; done;
@@ -63,7 +66,7 @@ clear
 	echo
 	echo
 	header $@
-	echo "--   Miner Check beta v1.34    --"
+	echo "  --   Miner Check beta v1.35    --"
 	header $@
 	echo "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)"
 	echo 
@@ -243,8 +246,8 @@ case "$answer" in
 		cat $log >> $log2
 		echo "========================== " >> $log2
 		cat $log1 >> $log2
-		cat $log2 | sendmail miner@laskowski-tech.com
-		echo "Reports sents, have any other information you would like to report? Send to miner@laskowski-tech.com";;
+		cat $log2 | sendmail $remotelog
+		echo "Reports sents, have any other information you would like to report? Send to $remotelog";;
 
 
 	7) 	rm /tmp/minerchk.report
