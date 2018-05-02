@@ -16,7 +16,7 @@ log2=/tmp/minerchk.report
 
 #remote logging via sendmail
 remotelog=$(stat /usr/local/minerchk/remotelog)
-if [[ -x $(stat /usr/local/minerchk/remotelog) ]]; then
+if [[ -x $(stat /usr/local/minerchk/remotelog 2> /dev/null) ]]; then
 	wget -O /usr/local/minerchk/remotelog https://raw.githubusercontent.com/Hestat/minerchk/master/remotelog
 fi
 
