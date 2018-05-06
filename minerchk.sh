@@ -129,6 +129,7 @@ case "$answer" in
 		printf "%b" "$yell=== Checking for miners in site files  ===" 
 		printf "%b" "$gre"
 		echo
+		find /home/*  -maxdepth 1 -type f | xargs grep 'stratum+tcp' >> $log 2>/dev/null
 		# Adapted from Mark Cunningham module
 		# Scan of Sites for on server miners in site files
 		# Define the scan function
@@ -142,11 +143,9 @@ case "$answer" in
     		echo $scanhead
 
 		if [[ -x $(which clamscan) ]] ; then #use clamav and yara
-			find /home/*  -maxdepth 1 -type f | xargs grep 'stratum+tcp' >> $log 2>/dev/null
 			echo -e "$gre ClamAV installed using clamscan for scanning \n"
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar $account
 			else
-			find /home/*  -maxdepth 1 -type f | xargs grep 'stratum+tcp' >> $log 2>/dev/null
 			grep -wiR 'stratum+tcp' $account 1>> $log 2>/dev/null
 		fi
 
