@@ -56,9 +56,11 @@ else echo -e "$yell Newer version of Minerchk available, please use option 5 to 
 fi
 
 #drop environment data into logs for easier identification
-hostname > $log
+header > $log
+hostname >> $log
 header  >> $log
-hostname > $log1
+header > $log1
+hostname >> $log1
 header  >> $log1
 echo "Subject: [ALERT] Cryptominer report" > $log2
 
