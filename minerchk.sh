@@ -94,8 +94,16 @@ case "$answer" in
 
 	1) echo -e "$yell $header2 Checking for miners in /tmp $header2" 
 		echo $scanhead
-	        grep -R 'stratum+tcp' /tmp 1>> $log 2> /dev/null
-		grep -R 'stratum+tcp' /dev/shm 1>> $log 2> /dev/null
+		if [[ -x $(which clamscan) ]] ; then #use clamav and yara
+			echo -e "$gre ClamAV installed using clamscan for scanning \n"
+			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar /tmp
+			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar /dev/shm
+			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar /var/tmp
+		else
+	        	grep -R 'stratum+tcp' /tmp 1>> $log 2> /dev/null
+			grep -R 'stratum+tcp' /dev/shm 1>> $log 2> /dev/null
+			grep -R 'stratum+tcp' /var/tmp 1>> $log 2> /dev/null
+		fi
 		echo -e "$yell $header2 Checking for miners in running processes $header2"
 		echo
 		echo $scanhead
