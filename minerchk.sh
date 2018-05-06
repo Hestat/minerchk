@@ -72,7 +72,7 @@ clear
 	echo
 	echo
 	header
-	echo "  --   Miner Check beta v1.37    --"
+	echo "  --   Miner Check beta v1.40    --"
 	header
 	echo "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)"
 	echo 
