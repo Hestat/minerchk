@@ -118,9 +118,9 @@ case "$answer" in
 		echo
 		echo $scanhead
 		echo
-		for line in $(cat /usr/local/minerchk/ip-only.txt); do lsof -nP | grep $line > temp; done
-		cat $temp | awk '{print $2}' > temp2
-		cat $temp >> $log
+		for line in $(cat /usr/local/minerchk/ip-only.txt); do lsof -nP | grep $line > /tmp/runmin; done
+		cat /tmp/runmin | awk '{print $2}' > temp2
+		cat /tmp/runmin >> $log
 		for line2 in $temp2; do psfauwx | grep $temp2 > $log; done 
 		ps fauwx | grep minerd | grep -v 'grep minerd' 1>> $log 2> /dev/null
 		ps fauwx | grep xmrig | grep -v 'grep xmrig' 1>> $log 2> /dev/null
