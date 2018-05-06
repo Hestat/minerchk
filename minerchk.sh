@@ -38,10 +38,20 @@ scanhead=$(echo -e "\n$gre Scanning ::\n")
 remotesig1=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/miners.yar | md5sum | awk '{print$1}')
 localsig1=$(md5sum /usr/local/minerchk/miners.yar | awk '{print$1}')
 if [[ "$remotesig1" =  "$localsig1" ]]; then
-	echo -e "$gre Local Signatures up to date $whi"
-	sleep 1
+	echo -e "$gre Local Yara Signatures up to date $whi"
 else echo -e "$gre Updating signatures $whi"
 	wget -O /usr/local/minerchk/miners.yar https://raw.githubusercontent.com/Hestat/minerchk/master/miners.yar
+	sleep 1
+fi
+
+#check IP signatures
+remotesig2=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/ip-only.txt | md5sum | awk '{print$1}')
+localsig2=$( md5sum /usr/local/minerchk/ip-only.txt | awk '{$print1}')
+if [[ "$remotesig2" = "$localsig2" ]]; then
+	echo -e "$gre Local IP list up to date $whi"
+	sleep 1
+else echo -e "$gre Updating IP list $whi"
+	wget -O /usr/local/minerchk/ip-only https://raw.githubusercontent.com/Hestat/minerchk/master/ip-only.txt
 	sleep 1
 fi
 
@@ -108,6 +118,7 @@ case "$answer" in
 		echo
 		echo $scanhead
 		echo
+		for line in $(cat /usr/local/minerchk/ip-only.txt); do lsof -nP | grep $line; done
 		ps fauwx | grep minerd | grep -v 'grep minerd' 1>> $log 2> /dev/null
 		ps fauwx | grep xmrig | grep -v 'grep xmrig' 1>> $log 2> /dev/null
 		ps fauwx | grep xmr | grep -v 'grep xmr' 1>> $log 2> /dev/null
