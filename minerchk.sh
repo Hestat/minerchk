@@ -121,7 +121,6 @@ case "$answer" in
 		echo $scanhead
 		echo
 		for line in $(cat /usr/local/minerchk/ip-only.txt); do lsof -nP | grep $line > /tmp/runmin; done
-		cat /tmp/runmin | awk '{print $2}' > temp2
 		cat /tmp/runmin >> $log
 		for line2 in $temp2; do psfauwx | grep $temp2 > $log; done 
 		ps fauwx | grep minerd | grep -v 'grep minerd' 1>> $log 2> /dev/null
