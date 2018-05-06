@@ -127,6 +127,7 @@ case "$answer" in
 		ps fauwx | grep minerd | grep -v 'grep minerd' 1>> $log 2> /dev/null
 		ps fauwx | grep xmrig | grep -v 'grep xmrig' 1>> $log 2> /dev/null
 		ps fauwx | grep xmr | grep -v 'grep xmr' 1>> $log 2> /dev/null
+		cat /tmp/runmin
 		echo
 		echo -e "$yell $header2  Checking for common miner ports $header2"
 		echo
@@ -139,7 +140,8 @@ case "$answer" in
 		echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
 		echo $log
 		echo -e "$yell $header2 Hits in the Scan $header2 $gre"
-		cat $log;;
+		cat $log
+		rm /tmp/runmin;;
 
 	2)
 		printf "%b" "$yell=== Checking for miners in site files  ===" 
