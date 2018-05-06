@@ -109,10 +109,12 @@ case "$answer" in
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar /tmp
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar /dev/shm
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar /var/tmp
+			header >> $log
 		else
 	        	grep -R 'stratum+tcp' /tmp 1>> $log 2> /dev/null
 			grep -R 'stratum+tcp' /dev/shm 1>> $log 2> /dev/null
 			grep -R 'stratum+tcp' /var/tmp 1>> $log 2> /dev/null
+			header >> $log
 		fi
 		echo -e "$yell $header2 Checking for miners in running processes $header2"
 		echo
