@@ -136,7 +136,6 @@ case "$answer" in
  		netstat -tpn | grep -w $port 1>> $log 2> /dev/null;
 		done
 		header >> $log
-		grep 'crypto_miner_config_file' $log | cut -d : -f1 | xargs cat >> $log
 		echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
 		echo $log
 		echo -e "$yell $header2 Hits in the Scan $header2 $gre"
@@ -277,6 +276,7 @@ case "$answer" in
 	fi;;
 	
 	6) 	echo -e "$yell $header2 Sending Log Data $header2"
+		grep 'crypto_miner_config_file' $log | cut -d : -f1 | xargs cat >> $log
 		cat $log >> $log2
 		header >> $log2
 		cat $log1 >> $log2
