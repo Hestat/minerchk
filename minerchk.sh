@@ -59,7 +59,7 @@ fi
 hostname > $log
 header  >> $log
 hostname > $log1
-echo "========================== " >> $log1
+header  >> $log1
 echo "Subject: [ALERT] Cryptominer report" > $log2
 
 #start menu
@@ -249,7 +249,7 @@ case "$answer" in
 	
 	6) 	echo -e "$yell $header2 Sending Log Data $header2"
 		cat $log >> $log2
-		echo "========================== " >> $log2
+		header >> $log2
 		cat $log1 >> $log2
 		cat $log2 | sendmail $remotelog
 		echo "Reports sents, have any other information you would like to report? Send to $remotelog";;
