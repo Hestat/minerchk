@@ -51,7 +51,7 @@ if [[ "$remotesig2" = "$localsig2" ]]; then
 	echo -e "$gre Local IP list up to date $whi"
 	sleep 1
 else echo -e "$gre Updating IP list $whi"
-	wget -O /usr/local/minerchk/ip-only https://raw.githubusercontent.com/Hestat/minerchk/master/ip-only.txt
+	wget -O /usr/local/minerchk/ip-only.txt https://raw.githubusercontent.com/Hestat/minerchk/master/ip-only.txt
 	sleep 1
 fi
 
