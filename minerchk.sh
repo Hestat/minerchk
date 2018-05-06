@@ -27,10 +27,10 @@ div(){
 }
 
 header(){
-	echo -e "\n$(div 20)${@}$(div 20)\n"
+	echo -e "\n$(div 40)\n"
 }
 
-header2=$(echo "===")
+header2=$(echo -e "$(div 3)")
 
 scanhead=$(echo -e "\n$gre Scanning ::\n")
 
@@ -57,7 +57,7 @@ fi
 
 #drop environment data into logs for easier identification
 hostname > $log
-echo "========================== " >> $log
+header  >> $log
 hostname > $log1
 echo "========================== " >> $log1
 echo "Subject: [ALERT] Cryptominer report" > $log2
@@ -69,9 +69,9 @@ clear
 	printf "%b" "\n\e[0m"
 	echo
 	echo
-	header $@
+	header
 	echo "  --   Miner Check beta v1.37    --"
-	header $@
+	header
 	echo "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)"
 	echo 
 	echo "Enter 2 to run deep miner checks through site files"
@@ -130,7 +130,7 @@ case "$answer" in
   		for account in $dirlist; do
     		echo $scanhead
 
-		if [[ -x $(which clamscan) ]] 2> /dev/null; then #use clamav and yara
+		if [[ -x $(which clamscan) ]] ; then #use clamav and yara
 			echo -e "$gre ClamAV installed using clamscan for scanning \n"
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar $account
 			else	
@@ -143,11 +143,11 @@ case "$answer" in
 
 
 		# Check for common control panels / configurations
-		if [[ -x $(which whmapi1) ]] 2> /dev/null ; then #cPanel
+		if [[ -x $(which whmapi1) ]] ; then #cPanel
   		printf "%b" "cPanel detected\n"
   		sitescan "/home*/*/public_html/"
 
-		elif [[ -x $(which plesk) ]] 2> /dev/null; then #Plesk
+		elif [[ -x $(which plesk) ]] ; then #Plesk
   		printf "%b" "Plesk detected\n"
   		sitescan "/var/www/vhosts/*/httpdocs/"
 
@@ -197,11 +197,11 @@ case "$answer" in
 
 
 		# Check for common control panels / configurations
-		if [[ -x $(which whmapi1) ]] 2> /dev/null; then #cPanel
+		if [[ -x $(which whmapi1) ]] ; then #cPanel
   		printf "%b" "cPanel detected\n"
   		coinhivescan "/home*/*/public_html/"
 
-		elif [[ -x $(which plesk) ]] 2> /dev/null; then #Plesk
+		elif [[ -x $(which plesk) ]] ; then #Plesk
   		printf "%b" "Plesk detected\n"
   		coinhivescan "/var/www/vhosts/*/httpdocs/"
 
@@ -215,7 +215,7 @@ case "$answer" in
                 echo -e "$yell $header2 Hits in the Scan $header2 $gre"
                 cat $log1;;
 
-	4) 	if [[ -x $(which csf) ]] 2> /dev/null; then #CSF	
+	4) 	if [[ -x $(which csf) ]] ; then #CSF	
 			echo -e "$gre" "Config Server Firewall Detected\n"
 			echo " " >> /etc/csf/csf.blocklists
 			echo "#Minerchk" >> /etc/csf/csf.blocklists
