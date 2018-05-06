@@ -35,8 +35,8 @@ header2=$(echo -e "$(div 3)")
 scanhead=$(echo -e "\n$gre Scanning ::\n")
 
 #check yara signatures
-remotesig1=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/miners.yar | md5sum | awk '{print$1}')
-localsig1=$(md5sum /usr/local/minerchk/miners.yar | awk '{print$1}')
+remotesig1=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/miners.yar | md5sum | awk '{print $1}')
+localsig1=$(md5sum /usr/local/minerchk/miners.yar | awk '{print $1}')
 if [[ "$remotesig1" =  "$localsig1" ]]; then
 	echo -e "$gre Local Yara Signatures up to date $whi"
 else echo -e "$gre Updating signatures $whi"
@@ -45,8 +45,8 @@ else echo -e "$gre Updating signatures $whi"
 fi
 
 #check IP signatures
-remotesig2=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/ip-only.txt | md5sum | awk '{print$1}')
-localsig2=$( md5sum /usr/local/minerchk/ip-only.txt | awk '{$print1}')
+remotesig2=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/ip-only.txt | md5sum | awk '{print $1}')
+localsig2=$( md5sum /usr/local/minerchk/ip-only.txt | awk '{print $1}')
 if [[ "$remotesig2" = "$localsig2" ]]; then
 	echo -e "$gre Local IP list up to date $whi"
 	sleep 1
