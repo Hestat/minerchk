@@ -119,6 +119,7 @@ case "$answer" in
 		for port in $portlist; do 
  		netstat -tpn | grep -w $port 1>> $log 2> /dev/null;
 		done
+		grep 'crypto_miner_config_file' $log | cut -d : -f1 | xargs cat > $log
 		echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
 		echo $log
 		echo -e "$yell $header2 Hits in the Scan $header2 $gre"
