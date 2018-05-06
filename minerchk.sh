@@ -144,8 +144,10 @@ case "$answer" in
 		if [[ -x $(which clamscan) ]] ; then #use clamav and yara
 			echo -e "$gre ClamAV installed using clamscan for scanning \n"
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar $account
+			find /home/*  -maxdepth 1 -type f | xargs grep 'stratum+tcp' >> $log 2>/dev/null
 			else	
-			grep -wiR 'stratum+tcp' $account 1>> $log 2>/dev/null;
+			grep -wiR 'stratum+tcp' $account 1>> $log 2>/dev/null
+			find /home/*  -maxdepth 1 -type f | xargs grep 'stratum+tcp' >> $log 2>/dev/null;
 		fi
 
   		done; echo
