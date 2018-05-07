@@ -9,6 +9,7 @@ else echo -e "Installing minerchk"
 	cp -av $PWD/miners.yar /usr/local/minerchk/
 	cp -av $PWD/remotelog /usr/local/minerchk/
 	chmod +x /usr/local/minerchk/minerchk
+	ln -s /usr/local/minerchk/minerchk /usr/local/bin/minerchk
 	echo -e "Install Complete"
 fi
 
