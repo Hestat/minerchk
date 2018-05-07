@@ -5,9 +5,9 @@ See the script in action here: https://laskowski-tech.com/2018/05/07/minerchk-ve
 
 Download and set up:
 
-	`git clone https://github.com/Hestat/minerchk.git`
+	git clone https://github.com/Hestat/minerchk.git
 
-	`cd minerchk/`
+	cd minerchk/
 
 
-	`./install.sh`
+	./install.sh
