@@ -65,6 +65,31 @@ else echo -e "$yell Newer version of Minerchk available, please use option 5 to 
 	sleep 10
 fi
 
+####### Flags for other options ######
+
+while getopts "d:" opt;do
+	case ${opt} in
+	d ) 	direct=$OPTARG
+		echo $scanhead
+		if [[ -x $(which clamscan) 2>/dev/null ]] ; then #use clamav and yara
+			echo -e "$gre ClamAV installed using clamscan for scanning \n"
+			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar $direct
+		else
+			echo $scanhead
+			grep -R 'stratum+tcp' $direct 1>> $log 2> /dev/null
+		fi
+		exit 0;;
+
+    	\? ) echo "Usage: -d scan a directory for miners, otherwsie use without flags to bring up the mail menu"
+	    	exit 0;;
+  esac
+done
+
+
+
+
+
+
 #drop environment data into logs for easier identification
 header > $log
 hostname >> $log
