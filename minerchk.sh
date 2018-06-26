@@ -55,6 +55,17 @@ else echo -e "$gre Updating IP list $whi"
 	sleep 1
 fi
 
+#check IP signatures
+remotesig3=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/cryptojacking_signatures.yar | md5sum | awk '{print $1}')
+localsig3=$( md5sum /usr/local/minerchk/cryptojacking_signatures.yar | awk '{print $1}')
+if [[ "$remotesig2" = "$localsig2" ]]; then
+	echo -e "$gre Local Crypto-jacking signatures up to date $whi"
+	sleep 1
+else echo -e "$gre Updating Crypto-jacking signatures $whi"
+	wget -O /usr/local/minerchk/cryptojacking_signatures.yar https://raw.githubusercontent.com/Hestat/minerchk/master/cryptojacking_signatures.yar
+	sleep 1
+fi
+
 #check if minerchk is up to date
 remoteprogsig=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/minerchk.sh | md5sum | awk '{print$1}')
 localprogsig=$(md5sum /usr/local/minerchk/minerchk | awk '{print$1}')
