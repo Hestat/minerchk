@@ -72,6 +72,7 @@ reporting(){
 		echo $log
 		echo -e "$yell $header2 Hits in the Scan $header2 $gre"
 		cat $log
+		echo -e "$whi"
 }
 
 
