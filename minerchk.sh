@@ -71,7 +71,7 @@ while getopts "d:" opt;do
 	case ${opt} in
 	d ) 	direct=$OPTARG
 		echo $scanhead
-		if [[ -x $(which clamscan) 2>/dev/null ]] ; then #use clamav and yara
+		if [[ -x $(which clamscan) ]] ; then #use clamav and yara
 			echo -e "$gre ClamAV installed using clamscan for scanning \n"
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar $direct
 		else
