@@ -95,7 +95,7 @@ while getopts "d:" opt;do
 		echo $scanhead
 		if [[ -x $(which clamscan) ]] ; then #use clamav and yara
 			echo -e "$gre ClamAV installed using clamscan for scanning \n"
-			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar $direct
+			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar -d /usr/local/minerchk/cryptojacking_signatures.yar $direct
 			reporting
 		else
 			echo $scanhead
