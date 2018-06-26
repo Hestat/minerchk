@@ -65,6 +65,16 @@ else echo -e "$yell Newer version of Minerchk available, please use option 5 to 
 	sleep 10
 fi
 
+####### Functions #######
+
+reporting(){
+		echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
+		echo $log
+		echo -e "$yell $header2 Hits in the Scan $header2 $gre"
+		cat $log
+}
+
+
 ####### Flags for other options ######
 
 while getopts "d:" opt;do
@@ -74,9 +84,11 @@ while getopts "d:" opt;do
 		if [[ -x $(which clamscan) ]] ; then #use clamav and yara
 			echo -e "$gre ClamAV installed using clamscan for scanning \n"
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar $direct
+			reporting
 		else
 			echo $scanhead
 			grep -R 'stratum+tcp' $direct 1>> $log 2> /dev/null
+			reporting
 		fi
 		exit 0;;
 
