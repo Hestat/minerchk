@@ -185,10 +185,11 @@ case "$answer" in
  		netstat -tpn | grep -w $port 1>> $log 2> /dev/null;
 		done
 		header >> $log
-		echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
-		echo $log
-		echo -e "$yell $header2 Hits in the Scan $header2 $gre"
-		cat $log
+		reporting
+		#echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
+		#echo $log
+		#echo -e "$yell $header2 Hits in the Scan $header2 $gre"
+		#cat $log
 		rm /tmp/runmin;;
 
 	2)
@@ -234,10 +235,11 @@ case "$answer" in
   		sitescan "/var/www/html/" 2> /dev/null
 		sitescan "/usr/share/nginx/" 2> /dev/null
 		fi
-		echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
-		echo $log
-		echo -e "$yell $header2 Hits in the Scan $header2 $gre"
-		cat $log;;
+		#echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
+		#echo $log
+		#echo -e "$yell $header2 Hits in the Scan $header2 $gre"
+		#cat $log
+		reporting;;
 
 	3) echo -e "$yell $header2 Checking for Crypto-jacking injections $header2 $gre\n"
 		echo "This make take some time if you have many sites."
