@@ -21,7 +21,7 @@ fi
 remotelog=$(cat /usr/local/minerchk/remotelog)
 
 
-#create formatting
+###### create formatting #####
 div(){
   for ((i=0;i<$1;i++)); do printf '='; done;
 }
@@ -34,7 +34,8 @@ header2=$(echo -e "$(div 3)")
 
 scanhead=$(echo -e "\n$gre Scanning ::\n")
 
-#check yara signatures
+
+#####  check yara signatures #####
 remotesig1=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/miners.yar | md5sum | awk '{print $1}')
 localsig1=$(md5sum /usr/local/minerchk/miners.yar | awk '{print $1}')
 if [[ "$remotesig1" =  "$localsig1" ]]; then
@@ -44,7 +45,7 @@ else echo -e "$gre Updating signatures $whi"
 	sleep 1
 fi
 
-#check IP signatures
+###### check IP signatures #####
 remotesig2=$(curl -sS https://raw.githubusercontent.com/Hestat/minerchk/master/ip-only.txt | md5sum | awk '{print $1}')
 localsig2=$( md5sum /usr/local/minerchk/ip-only.txt | awk '{print $1}')
 if [[ "$remotesig2" = "$localsig2" ]]; then
@@ -117,10 +118,22 @@ while getopts "d:" opt;do
 			echo -e "$gre ClamAV installed using clamscan for scanning \n"
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar -d /usr/local/minerchk/cryptojacking_signatures.yar $direct
 			reporting
+			echo -e "Would you like to report logs?"
+			yesno; if [ $decision = 1 ]; then
+			emaillogs
+				else
+				exit 0
+			fi
 		else
 			echo $scanhead
 			grep -R 'stratum+tcp' $direct 1>> $log 2> /dev/null
 			reporting
+			echo -e "Would you like to report logs?"
+			yesno; if [ $decision = 1 ]; then
+			emaillogs
+				else
+				exit 0
+			fi
 		fi
 		exit 0;;
 
