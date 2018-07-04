@@ -86,6 +86,12 @@ reporting(){
 		echo -e "$whi"
 }
 
+reporting1(){
+		echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
+		echo $log1
+                echo -e "$yell $header2 Hits in the Scan $header2 $gre"
+                cat $log1
+}
 
 ####### Flags for other options ######
 
@@ -186,10 +192,6 @@ case "$answer" in
 		done
 		header >> $log
 		reporting
-		#echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
-		#echo $log
-		#echo -e "$yell $header2 Hits in the Scan $header2 $gre"
-		#cat $log
 		rm /tmp/runmin;;
 
 	2)
@@ -235,10 +237,6 @@ case "$answer" in
   		sitescan "/var/www/html/" 2> /dev/null
 		sitescan "/usr/share/nginx/" 2> /dev/null
 		fi
-		#echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
-		#echo $log
-		#echo -e "$yell $header2 Hits in the Scan $header2 $gre"
-		#cat $log
 		reporting;;
 
 	3) echo -e "$yell $header2 Checking for Crypto-jacking injections $header2 $gre\n"
@@ -290,10 +288,11 @@ case "$answer" in
   		coinhivescan "/var/www/html/" 2> /dev/null
 		coinhivescan "/usr/share/nginx/" 2> /dev/null
 		fi
-                echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
-                echo $log1
-                echo -e "$yell $header2 Hits in the Scan $header2 $gre"
-                cat $log1;;
+                #echo -e "$yell $header2 Current Scan Results logged in the following file $header2 $gre"
+                #echo $log1
+                #echo -e "$yell $header2 Hits in the Scan $header2 $gre"
+                #cat $log1
+		reporting1;;
 
 	4) 	if [[ -x $(which csf) ]] ; then #CSF	
 			echo -e "$gre" "Config Server Firewall Detected\n"
