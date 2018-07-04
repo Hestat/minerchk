@@ -174,7 +174,7 @@ while getopts "d:R" opt;do
 		read file
 		cp $file $reportdir
 		tempup=$(find $reportdir -maxdepth 1 -type f -exec stat -c "%y %n" {} + | sort -r | head -n1|awk '{print$4}' | cut -d / -f 6)
-		pushd /usr/local/scan/report/
+		pushd $reportdir
 		zip -P "malware" report.zip $tempup
 		popd
 		upload=$(find $reportdir -maxdepth 1 -name '*.zip' -type f -exec stat -c "%y %n" {} + | sort -r | head -n1|awk '{print$4}') 
