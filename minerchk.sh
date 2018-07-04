@@ -120,8 +120,9 @@ askforreportlogs(){
 flagmenu(){
 	echo -e
 	header
-	echo -e "supported flags"
+	echo -e "supported flags\n"
 	echo -e "  -d scan a specific directory to miner files, will look for both miners and crypto-jacking"
+	echo -e "  EX: minerchk -d /home/user/directoryi\n"
 	echo -e "  -R report a miner files that was not flagged by the scan to get a signature created"
 	header
 }
