@@ -103,11 +103,11 @@ emaillogs(){	echo -e "$yell $header2 Sending Log Data $header2"
 		header >> $log2
 		cat $log1 >> $log2
 		cat $log2 | sendmail $remotelog
-		echo "Reports sents, have any other information you would like to report? Send to $remotelog $whi"
+		echo -e "Reports sents, have any other information you would like to report? Send to $remotelog $whi"
 }
 
 askforreportlogs(){
-		echo -e "Would you like to report logs?"
+		echo -e "Would you like to report logs to $remotelog?"
 		yesno; if [ $decision = 1 ]; then
 		emaillogs
 			else
@@ -217,7 +217,8 @@ case "$answer" in
 		done
 		header >> $log
 		reporting
-		rm /tmp/runmin;;
+		rm /tmp/runmin
+		askforreportlogs;;
 
 	2)
 		printf "%b" "$yell=== Checking for miners in site files  ===" 
@@ -262,7 +263,8 @@ case "$answer" in
   		sitescan "/var/www/html/" 2> /dev/null
 		sitescan "/usr/share/nginx/" 2> /dev/null
 		fi
-		reporting;;
+		reporting
+		askforreportlogs;;
 
 	3) echo -e "$yell $header2 Checking for Crypto-jacking injections $header2 $gre\n"
 		echo "This make take some time if you have many sites."
@@ -317,7 +319,8 @@ case "$answer" in
                 #echo $log1
                 #echo -e "$yell $header2 Hits in the Scan $header2 $gre"
                 #cat $log1
-		reporting1;;
+		reporting1
+		askforreportlogs;;
 
 	4) 	if [[ -x $(which csf) ]] ; then #CSF	
 			echo -e "$gre" "Config Server Firewall Detected\n"
