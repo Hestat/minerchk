@@ -217,7 +217,7 @@ clear
 	echo
 	echo
 	header
-	echo "  --   Miner Check beta v1.40    --"
+	echo "  --   Miner Check v1.5    --"
 	header
 	echo -e "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)\n"
 	echo -e "Enter 2 to run deep miner checks through site files\n"
