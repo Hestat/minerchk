@@ -103,7 +103,7 @@ emaillogs(){	echo -e "$yell $header2 Sending Log Data $header2"
 		header >> $log2
 		cat $log1 >> $log2
 		cat $log2 | sendmail $remotelog
-		echo "Reports sents, have any other information you would like to report? Send to $remotelog"
+		echo "Reports sents, have any other information you would like to report? Send to $remotelog $whi"
 }
 
 
