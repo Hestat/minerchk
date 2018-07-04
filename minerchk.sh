@@ -93,6 +93,20 @@ reporting1(){
                 cat $log1
 }
 
+#yes no for options
+yesno(){ read -p "$question " choice;case "$choice" in y|Y|yes|Yes|YES ) decision=1;; n|N|no|No|NO ) decision=0;; * ) echo "invalid" && yesno; esac; }
+
+emaillogs(){	echo -e "$yell $header2 Sending Log Data $header2"
+		grep 'crypto_miner_config_file' $log | cut -d : -f1 | xargs cat >> $log
+		cat $log >> $log2
+		header >> $log2
+		cat $log1 >> $log2
+		cat $log2 | sendmail $remotelog
+		echo "Reports sents, have any other information you would like to report? Send to $remotelog"
+}
+
+
+
 ####### Flags for other options ######
 
 while getopts "d:" opt;do
@@ -326,13 +340,7 @@ case "$answer" in
 		echo -e "$yell $header2 Something went wrong, try a manual reinstall $header2 $whi"	
 	fi;;
 	
-	6) 	echo -e "$yell $header2 Sending Log Data $header2"
-		grep 'crypto_miner_config_file' $log | cut -d : -f1 | xargs cat >> $log
-		cat $log >> $log2
-		header >> $log2
-		cat $log1 >> $log2
-		cat $log2 | sendmail $remotelog
-		echo "Reports sents, have any other information you would like to report? Send to $remotelog";;
+	6) 	emaillogs;;
 
 
 	7) 	rm /tmp/minerchk.report
