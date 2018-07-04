@@ -123,6 +123,7 @@ flagmenu(){
 	echo -e "supported flags"
 	echo -e "  -d scan a specific directory to miner files, will look for both miners and crypto-jacking"
 	echo -e "  -R report a miner files that was not flagged by the scan to get a signature created"
+	header
 }
 
 
@@ -149,7 +150,7 @@ curl  -i -X PUT -T "${upload}" \
 
 ####### Flags for other options ######
 
-while getopts "d:" opt;do
+while getopts "d:R" opt;do
 	case ${opt} in
 	d ) 	direct=$OPTARG
 		echo $scanhead
