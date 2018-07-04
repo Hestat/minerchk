@@ -122,7 +122,7 @@ flagmenu(){
 	header
 	echo -e "supported flags\n"
 	echo -e "  -d scan a specific directory to miner files, will look for both miners and crypto-jacking"
-	echo -e "  EX: minerchk -d /home/user/directoryi\n"
+	echo -e "  EX: minerchk -d /home/user/directory\n"
 	echo -e "  -R report a miner file that was not flagged by the scan to get a signature created"
 	header
 }
