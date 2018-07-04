@@ -211,19 +211,14 @@ clear
 	header
 	echo "  --   Miner Check beta v1.40    --"
 	header
-	echo "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)"
-	echo 
-	echo "Enter 2 to run deep miner checks through site files"
-	echo
-	echo "Enter 3 to run checks for miners embeded in websites (Crypto-jacking)"
-	echo
-	echo "Enter 4 to innoculate server (Blocks domains and IP's used to mine)"
-	echo
-	echo "Enter 5 to run updates"
-	echo
-	echo "Enter 6 to report logs"
-	echo
-	echo "Enter 7 to quit"
+	echo -e "Enter 1 to run quick miner checks on server (Active mining on server and in /tmp)\n"
+	echo -e "Enter 2 to run deep miner checks through site files\n"
+	echo -e "Enter 3 to run checks for miners embeded in websites (Crypto-jacking)\n"
+	echo -e "Enter 4 to innoculate server (Blocks domains and IP's used to mine)\n"
+	echo -e "Enter 5 to run updates\n"
+	echo -e "Enter 6 to report logs\n"
+	echo -e "Enter 7 to quit\n"
+	flagmenu
 
 read answer
 case "$answer" in
