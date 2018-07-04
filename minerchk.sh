@@ -9,6 +9,8 @@ whi='\e[0m'
 
 #create log dir and log vars
 mkdir -p /usr/local/minerchk
+mkdir -p /usr/local/minerchk/report
+reportdir="/usr/local/minerchk/report"
 logdir="/usr/local/minerchk"
 log="${logdir}/miner.$(date +%y%m%d-%H%M).log"
 log1="${logdir}/coinhive.$(date +%y%m%d-%H%M).log"
@@ -115,6 +117,35 @@ askforreportlogs(){
 		fi
 }
 
+flagmenu(){
+	echo -e
+	header
+	echo -e "supported flags"
+	echo -e "  -d scan a specific directory to miner files, will look for both miners and crypto-jacking"
+	echo -e "  -R report a miner files that was not flagged by the scan to get a signature created"
+}
+
+
+##### file reporting #####
+
+objectName=suspectMiner$(date +%y%m%d-%H%M).zip
+bucket=blazescan-signatures
+resource="/${bucket}/${objectName}"
+contentType="application/zip"
+dateValue=`date -R`
+acl="x-amz-acl:public-read"
+stringToSign="PUT\n\n${contentType}\n${dateValue}\n${resource}"
+
+s3put(){
+
+curl  -i -X PUT -T "${upload}" \
+          -H "Host: ${bucket}.s3.amazonaws.com" \
+          -H "Date: ${dateValue}" \
+          -H "Content-Type: ${contentType}" \
+	  -H "$acl" \
+          https://${bucket}.s3-us-west-2.amazonaws.com/${objectName}
+}
+
 
 ####### Flags for other options ######
 
@@ -135,7 +166,23 @@ while getopts "d:" opt;do
 		fi
 		exit 0;;
 
-    	\? ) echo "Usage: -d scan a directory for miners, otherwsie use without flags to bring up the mail menu"
+	R ) #report a malicous file that was not found
+		echo -e "$yellow Provide the full path file you would like to send"
+		echo -e " EX: /home/test/example.php $whi"
+		read file
+		cp $file $reportdir
+		tempup=$(find $reportdir -maxdepth 1 -type f -exec stat -c "%y %n" {} + | sort -r | head -n1|awk '{print$4}' | cut -d / -f 6)
+		pushd /usr/local/scan/report/
+		zip -P "malware" report.zip $tempup
+		popd
+		upload=$(find $reportdir -maxdepth 1 -name '*.zip' -type f -exec stat -c "%y %n" {} + | sort -r | head -n1|awk '{print$4}') 
+		s3put
+		#rm $tempup 
+		rm $upload 2> /dev/null
+		echo -e "$green Upload complete, thank you for reporting the file $whi"
+		exit 0;;
+
+    	\? ) echo "Usage: -d scan a directory for miners, -R to report and unknown miner, otherwise use without flags to bring up the main menu"
 	    	exit 0;;
   esac
 done
