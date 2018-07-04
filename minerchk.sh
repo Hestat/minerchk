@@ -225,7 +225,7 @@ clear
 	echo -e "Enter 4 to innoculate server (Blocks domains and IP's used to mine)\n"
 	echo -e "Enter 5 to run updates\n"
 	echo -e "Enter 6 to report logs\n"
-	echo -e "Enter 7 to quit\n"
+	echo -e "Enter 7 to quit"
 	flagmenu
 
 read answer
