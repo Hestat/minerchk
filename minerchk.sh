@@ -151,7 +151,7 @@ curl  -i -X PUT -T "${upload}" \
 
 ####### Flags for other options ######
 
-while getopts "d:R" opt;do
+while getopts "d:Rh" opt;do
 	case ${opt} in
 	d ) 	direct=$OPTARG
 		echo $scanhead
@@ -183,6 +183,12 @@ while getopts "d:R" opt;do
 		rm $upload 2> /dev/null
 		echo -e "$green Upload complete, thank you for reporting the file $whi"
 		exit 0;;
+
+	h ) #display help menu
+		echo -e " Use the following flags, otherwise run without flags to bring up the standard scan list"
+		flagmenu
+		exit 0;;
+
 
     	\? ) echo "Usage: -d scan a directory for miners, -R to report and unknown miner, otherwise use without flags to bring up the main menu"
 	    	exit 0;;
