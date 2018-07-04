@@ -106,6 +106,14 @@ emaillogs(){	echo -e "$yell $header2 Sending Log Data $header2"
 		echo "Reports sents, have any other information you would like to report? Send to $remotelog $whi"
 }
 
+askforreportlogs(){
+		echo -e "Would you like to report logs?"
+		yesno; if [ $decision = 1 ]; then
+		emaillogs
+			else
+			exit 0
+		fi
+}
 
 
 ####### Flags for other options ######
@@ -118,22 +126,12 @@ while getopts "d:" opt;do
 			echo -e "$gre ClamAV installed using clamscan for scanning \n"
 			clamscan -ir --no-summary -l $log -d /usr/local/minerchk/miners.yar -d /usr/local/minerchk/cryptojacking_signatures.yar $direct
 			reporting
-			echo -e "Would you like to report logs?"
-			yesno; if [ $decision = 1 ]; then
-			emaillogs
-				else
-				exit 0
-			fi
+			askforreportlogs
 		else
 			echo $scanhead
 			grep -R 'stratum+tcp' $direct 1>> $log 2> /dev/null
 			reporting
-			echo -e "Would you like to report logs?"
-			yesno; if [ $decision = 1 ]; then
-			emaillogs
-				else
-				exit 0
-			fi
+			askforreportlogs
 		fi
 		exit 0;;
 
