@@ -109,7 +109,7 @@ emaillogs(){	echo -e "$yell $header2 Sending Log Data $header2"
 }
 
 askforreportlogs(){
-		echo -e "$whi Would you like to report logs to $remotelog?"
+		echo -e "$whi Would you like to report logs to $remotelog? [y/n]"
 		yesno; if [ $decision = 1 ]; then
 		emaillogs
 			else
