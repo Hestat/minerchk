@@ -36,4 +36,5 @@ yescrypt.mine.zpool.ca
 proxy.mineshaft.ml
 mineshaft.ml
 app.abcxyz.stream
-data.supportithelp.com 
+data.supportithelp.com
+mine.ppxxmr.com
